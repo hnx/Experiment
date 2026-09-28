@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="black">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Instrumentorum</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/base.css?v=5">
+<link rel="stylesheet" href="css/landing.css?v=5">
+<link rel="stylesheet" href="css/app.css?v=5">
+<link rel="stylesheet" href="css/settings.css?v=5">
+</head>
+<body class="gate">
+<section class="gate" id="gate" aria-label="Welcome">
+<h1>Instrumentorum</h1>
+<button class="enter" id="enterBtn">Enter</button>
+</section>
+<button class="icon-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+
+<div class="scrim" id="scrim"></div>
+<nav class="drawer" id="drawer" aria-label="Navigation">
+<button class="nav" id="navWs">Workspaces</button>
+<button class="icon-btn" id="settingsBtn" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+</nav>
+<main class="entry" id="home" hidden>
+<h1>Instrumentorum</h1>
+<div class="chat-log" id="chatLog" role="log" aria-live="polite"></div>
+<div class="composer">
+<input class="field" id="chatInput" type="text" placeholder="Message" autocomplete="off" aria-label="Message">
+<button class="icon-btn" id="chatSend" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+</div>
+</main>
+
+<main class="entry page" id="wsPage" hidden>
+<section class="ws" aria-label="Workspaces">
+<div class="ws-head">
+<div class="lead"><button class="icon-btn" id="toHome" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><h2>Workspaces</h2></div>
+<div class="menu-wrap">
+<button class="icon-btn" id="dots" aria-label="Manage workspaces" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></svg></button>
+<div class="menu" id="menu" role="menu" hidden><button role="menuitem" id="createBtn">Create Workspace</button></div>
+</div>
+</div>
+<div class="list" id="list"></div>
+</section>
+</main>
+
+<div class="modal" id="createModal" role="dialog" aria-modal="true" aria-labelledby="createTitle">
+<div class="win">
+<header><h2 id="createTitle">Create Workspace</h2>
+<button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+<div class="body" id="typeStep"></div>
+<div class="body" id="nameStep" hidden><input class="field" id="nameInput" type="text" maxlength="60" autocomplete="off" aria-label="Workspace name"></div>
+</div>
+</div>
+
+<div class="modal" id="delModal" role="dialog" aria-modal="true" aria-labelledby="delTitle">
+<div class="win">
+<header><h2 id="delTitle">Delete Workspace</h2>
+<button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+<div class="body"><p class="msg" id="delText"></p><div class="actions"><button data-close>Cancel</button><button id="delOk">Delete</button></div></div>
+</div>
+</div>
+<div class="session" id="session" hidden>
+<div class="bar"><button class="icon-btn" id="back" aria-label="Back to workspaces"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><div class="t" id="sessionName"></div><span></span></div>
+<iframe id="frame" title="Workspace"></iframe>
+</div>
+<div class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+<div class="win">
+<header>
+<div class="lead"><button class="icon-btn" id="setBack" aria-label="Back" hidden><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><h2 id="settingsTitle">Settings</h2></div>
+<button class="icon-btn" data-close aria-label="Close settings"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+<div class="body" data-view="root"><button class="row" data-go="account">Account</button><button class="row" data-go="data">Data Management</button><button class="row" data-go="appearance">Appearance</button><button class="row" data-go="about">About</button></div>
+<div class="body" data-view="account" hidden></div>
+<div class="body" data-view="data" hidden>
+<div class="dm">
+<p class="dm-hint">Feed text to the built-in language model. It learns word patterns from what you add (saved in this browser) and uses them to write replies in the chat. With no data it just says &ldquo;How can I help you?&rdquo;</p>
+<textarea class="field dm-text" id="dmText" rows="5" placeholder="Paste text to train on&hellip;" aria-label="Training text"></textarea>
+<div class="dm-row"><label class="dm-btn" for="dmFile">Upload files</label><input type="file" id="dmFile" accept=".txt,.md,.csv,.json,text/*" multiple hidden><button class="dm-btn dm-primary" id="dmAdd">Add to model</button></div>
+<div class="dm-status" id="dmStatus" role="status"></div>
+<div class="dm-stats" id="dmStats"></div>
+<div class="dm-list" id="dmList"></div>
+<h3 class="dm-h">Generation</h3>
+<label class="dm-slider">Creativity <span id="dmTempVal"></span><input type="range" id="dmTemp" min="0.2" max="1.5" step="0.05"></label>
+<label class="dm-slider">Max reply length <span id="dmMaxVal"></span><input type="range" id="dmMax" min="10" max="200" step="5"></label>
+<button class="dm-btn dm-danger" id="dmClear">Clear all data</button>
+</div>
+</div>
+<div class="body" data-view="appearance" hidden><div class="acc acc-1"><button class="acc-head" aria-expanded="false">Themes</button><div class="acc-panel"><div class="acc-inner"><div class="acc acc-2"><button class="acc-head" aria-expanded="false">Broad Themes</button><div class="acc-panel"><div class="acc-inner"><div class="acc acc-3"><button class="acc-head" aria-expanded="false">Classic Colored Broad Themes</button><div class="acc-panel"><div class="acc-inner"><div class="themes"><button data-theme="black" aria-pressed="true"><span class="sw" style="background:linear-gradient(135deg,#000 50%,#f2f2f2 50%)"></span>Black</button><button data-theme="white" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#fff 50%,#111 50%)"></span>White</button><button data-theme="pink" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#fff5f8 50%,#d6336c 50%)"></span>Pink</button><button data-theme="brown" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#1e1610 50%,#d29a66 50%)"></span>Brown</button><button data-theme="red" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#fff6f5 50%,#d92d20 50%)"></span>Red</button><button data-theme="blue" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#f5f9ff 50%,#1d5fe0 50%)"></span>Blue</button><button data-theme="purple" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#f9f6ff 50%,#7c3aed 50%)"></span>Purple</button><button data-theme="yellow" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#fffbe8 50%,#a16207 50%)"></span>Yellow</button><button data-theme="green" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#f4fbf6 50%,#16803c 50%)"></span>Green</button><button data-theme="grey" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#f2f2f3 50%,#475569 50%)"></span>Grey</button><button data-theme="offwhite" aria-pressed="false"><span class="sw" style="background:linear-gradient(135deg,#faf8f3 50%,#2461e8 50%)"></span>Off-White</button></div></div></div></div></div></div></div></div></div></div></div>
+<div class="body" data-view="about" hidden>
+<div class="about"><p>Instrumentorum, under <a href="https://hnx.github.io/Peffus" target="_blank" rel="noopener noreferrer">Peffus</a>.</p>
+<p>We provide a variety of tools designed for different purposes, bringing useful and practical utilities together within a single platform. Instrumentorum may feature tools developed by Peffus as well as selected tools from other creators and collaborators.</p></div>
+<div class="folders"><button class="row" data-go="identities"><span class="fl"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Digital Identities Under Instrumentorum</span></button></div>
+</div>
+<div class="body" data-view="identities" hidden>
+<button class="row" data-go="platforms"><span class="fl"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Official Digital Platform Identities</span></button>
+<button class="row" data-go="websites"><span class="fl"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Official Websites</span></button>
+</div>
+<div class="body" data-view="platforms" hidden></div>
+<div class="body" data-view="websites" hidden></div>
+</div>
+</div>
+<script src="js/app.js?v=5"></script>
+<script src="js/landing.js?v=5"></script>
+<script src="js/settings.js?v=5"></script>
+<script src="js/lm/tokenizer.js?v=5"></script>
+<script src="js/lm/ngram.js?v=5"></script>
+<script src="js/lm/corpus.js?v=5"></script>
+<script src="js/lm/engine.js?v=5"></script>
+<script src="js/chat.js?v=5"></script>
+<script src="js/data.js?v=5"></script>
+</body>
+</html>
